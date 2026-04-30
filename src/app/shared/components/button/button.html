@@ -1,4 +1,17 @@
-<button (click)="handleOnClick()" [disabled]="disabled">
-    {{ text }}
-    <ng-content></ng-content>
-</button>
+<p-button
+  [label]="label()"
+  [icon]="icon()"
+  [iconPos]="iconPos()"
+  [disabled]="disabled()"
+  [type]="type()"
+  [severity]="severity()"
+  [size]="size()"
+  [outlined]="outlined()"
+  [text]="text()"
+  [raised]="raised()"
+  [rounded]="rounded()"
+  [fluid]="fluid()"
+  [styleClass]="styleClass()"
+  (onClick)="handleOnClick($event)">
+  <ng-content></ng-content>
+</p-button>

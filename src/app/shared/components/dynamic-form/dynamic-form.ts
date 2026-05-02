@@ -1,4 +1,4 @@
-import { Component, input, linkedSignal } from '@angular/core';
+import { Component, input, linkedSignal, output } from '@angular/core';
 import { form, FormField, FormRoot } from '@angular/forms/signals';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -14,28 +14,28 @@ import { Button } from '../button/button';
 export class DynamicForm {
   fields = input<DynamicField[]>([]);
   buttons = input<DynamicButton[]>([]);
-  
+  onSubmit = output<any>();
+
   formModel = linkedSignal(() => {
     const initialValues: Record<string, any> = {};
     const flds = this.fields() || [];
-    flds.forEach(f => {
+    flds.forEach((f) => {
       initialValues[f.key] = f.type === 'checkbox' ? false : '';
     });
     return initialValues;
   });
-  
-  // The Signal Form instance
-  dynamicForm = form(this.formModel);
 
-  // Helper to dynamically get a specific form control from the signal form
+  dynamicForm = form(this.formModel, {
+    submission: {
+      action: async (f) => {
+        const values = f().value();
+        console.log('Form values submitted:', values);
+        this.onSubmit.emit(values);
+      }
+    }
+  });
+
   getField(key: string): any {
-    // In Signal Forms, child fields are exposed directly as properties on the FieldTree object
     return (this.dynamicForm as any)[key];
-  }
-
-  onSubmit(event: Event) {
-    event.preventDefault();
-    // dynamicForm is a FieldTree (a function), calling it returns the FieldState
-    console.log('Form values submitted:', this.dynamicForm().value());
   }
 }

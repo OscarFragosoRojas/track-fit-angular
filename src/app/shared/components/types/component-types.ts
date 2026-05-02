@@ -25,3 +25,15 @@ export interface DynamicFormConfig {
   fields: DynamicField[];
   buttons: DynamicButton[];
 }
+
+export interface KPI {
+  label: string;
+  value: string;
+  change?: string;
+  changeType?: 'positive' | 'negative' | 'neutral';
+  icon?: string;
+  iconBgClass?: string;
+  iconColorClass?: string;
+  trendIcon?: string;
+  trendColorClass?: string;
+}

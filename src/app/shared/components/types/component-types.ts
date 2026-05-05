@@ -36,4 +36,5 @@ export interface KPI {
   iconColorClass?: string;
   trendIcon?: string;
   trendColorClass?: string;
+  comparisonLabel?: string;
 }

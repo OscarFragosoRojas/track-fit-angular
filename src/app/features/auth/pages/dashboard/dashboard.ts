@@ -16,7 +16,7 @@ export class Dashboard {
       changeType: 'positive',
       icon: 'pi pi-users',
       iconBgClass: 'bg-blue-100 dark:bg-blue-900/40',
-      iconColorClass: 'text-blue-500',
+      iconColorClass: 'text-primary-contrast',
       trendIcon: 'pi pi-arrow-up-right',
       trendColorClass: 'text-green-500',
       comparisonLabel: 'vs semana pasada',

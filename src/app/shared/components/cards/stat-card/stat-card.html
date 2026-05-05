@@ -4,8 +4,8 @@
 >
   <ng-template pTemplate="content">
     <!-- Círculo decorativo con el icono -->
-    <div class="w-20 h-20 bg-linear-to-br from-primary to-primary-700 dark:from-primary/20 dark:to-primary/5 rounded-full absolute -right-5 -top-7 shadow-lg shadow-primary/10 flex items-end justify-start p-6 group-hover:scale-110 transition-transform duration-700">
-      <i [class]="kpi.icon" class="text-xl text-primary-contrast dark:text-primary transition-transform group-hover:rotate-12"></i>
+    <div class="w-20 h-20 {{kpi.iconBgClass}} rounded-full absolute -right-5 -top-7 shadow-lg shadow-primary/10 flex items-end justify-start p-6 group-hover:scale-110 transition-transform duration-700">
+      <i class="{{ kpi.icon }} text-xl transition-transform group-hover:rotate-12 {{ kpi.iconColorClass }}"></i>
     </div>
 
     <!-- Contenido Principal -->
@@ -30,13 +30,13 @@
             'bg-surface-100 text-surface-600 dark:bg-surface-800 dark:text-surface-400': kpi.changeType === 'neutral'
           }"
         >
-          <i [class]="kpi.trendIcon || (kpi.changeType === 'positive' ? 'pi pi-arrow-up-right' : 'pi pi-arrow-down-right')"></i>
+          <i [class]="kpi.trendIcon" style="font-size: 0.65rem"></i>
           <span>{{ kpi.change }}</span>
         </div>
         <span class="text-[11px] font-medium text-surface-400 dark:text-surface-500">
           {{ kpi.comparisonLabel || 'vs semana pasada' }}
         </span>
-      </div>
+      </div> 
     </div>
   </ng-template>
 </p-card>

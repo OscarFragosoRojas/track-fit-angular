@@ -1,40 +1,40 @@
-<main class="min-h-screen w-full flex bg-slate-50 dark:bg-slate-950 transition-colors duration-500 relative overflow-hidden">
+<main class="min-h-screen w-full flex bg-surface-50 dark:bg-surface-950 transition-colors duration-500 relative overflow-hidden">
    <!-- Decorative background blobs -->
    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-      <div class="absolute top-[10%] right-[5%] w-[40%] h-[40%] rounded-full bg-blue-500/20 dark:bg-blue-600/10 blur-[120px]"></div>
-      <div class="absolute bottom-[10%] left-[10%] w-[50%] h-[50%] rounded-full bg-indigo-500/20 dark:bg-indigo-600/10 blur-[120px]"></div>
+      <div class="absolute top-[10%] right-[5%] w-[40%] h-[40%] rounded-full bg-primary-500/20 dark:bg-primary-600/10 blur-[120px]"></div>
+      <div class="absolute bottom-[10%] left-[10%] w-[50%] h-[50%] rounded-full bg-primary-500/20 dark:bg-primary-600/10 blur-[120px]"></div>
    </div>
 
    <div class="w-full max-w-6xl mx-auto flex items-center justify-center p-4 md:p-8 z-10 relative">
-      <div class="w-full grid lg:grid-cols-2 gap-12 items-center bg-white/70 dark:bg-slate-900/60 backdrop-blur-xl border border-white/40 dark:border-slate-800 shadow-2xl rounded-3xl overflow-hidden p-6 md:p-12 transition-all">
+      <div class="w-full grid lg:grid-cols-2 gap-12 items-center bg-primary-50/40 dark:bg-primary-900/20 backdrop-blur-xl border border-primary-100/50 dark:border-primary-800/50 shadow-2xl rounded-3xl overflow-hidden p-6 md:p-12 transition-all">
          
          <!-- Left Side: Form -->
          <div class="w-full max-w-md mx-auto lg:mx-0 flex flex-col justify-center">
             
             <div class="mb-10 text-center lg:text-left">
-               <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-600/10 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 mb-6">
+               <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary-600/10 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 mb-6">
                   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                </div>
-               <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-3">
+               <h1 class="text-3xl md:text-4xl font-extrabold text-surface-900 dark:text-surface-0 tracking-tight mb-3">
                   Bienvenido de nuevo
                </h1>
-               <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base leading-relaxed">
+               <p class="text-surface-600 dark:text-surface-400 text-sm md:text-base leading-relaxed">
                   Inicia sesión en tu cuenta para acceder a TrackFit.
                </p>
             </div>
 
             <app-dynamic-form [fields]="loginConfig.fields" [buttons]="loginConfig.buttons" (onSubmit)="submit()">
                <div class="flex items-center justify-end w-full">
-                  <a (click)="forgotPassword()" class="text-sm cursor-pointer font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded px-1">
+                  <a (click)="forgotPassword()" class="text-sm cursor-pointer font-semibold text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded px-1">
                      ¿Olvidaste tu contraseña?
                   </a>
                </div>
             </app-dynamic-form>
 
             <div class="mt-8 text-center">
-               <p class="text-sm cursor-pointer text-slate-600 dark:text-slate-400 font-medium">
+               <p class="text-sm cursor-pointer text-surface-600 dark:text-surface-400 font-medium">
                   ¿No tienes una cuenta? 
-                  <a (click)="register()" class="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded px-1">
+                  <a (click)="register()" class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded px-1">
                      Regístrate aquí
                   </a>
                </p>
@@ -43,11 +43,11 @@
 
          <!-- Right Side: Image/Visual -->
          <div class="hidden lg:flex w-full h-full min-h-[500px] relative rounded-2xl overflow-hidden shadow-inner group">
-            <div class="absolute inset-0 bg-linear-to-tr from-blue-900/5 to-blue-600/5 dark:from-blue-900/40 dark:to-indigo-900/40 mix-blend-multiply z-10 transition-all duration-500"></div>
+            <div class="absolute inset-0 bg-linear-to-tr from-primary-900/5 to-primary-600/5 dark:from-primary-900/40 dark:to-primary-900/40 mix-blend-multiply z-10 transition-all duration-500"></div>
             <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=2070&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out" alt="Fitness lifestyle" />
             <div class="absolute inset-0 z-20 flex flex-col justify-end p-10 text-white">
                <h3 class="text-3xl font-bold mb-2">TrackFit</h3>
-               <p class="text-blue-100 font-medium max-w-md opacity-90 leading-relaxed">
+               <p class="text-primary-100 font-medium max-w-md opacity-90 leading-relaxed">
                   "El éxito comienza con la disciplina. Registra tu progreso, mantén el ritmo y alcanza tus objetivos."
                </p>
             </div>

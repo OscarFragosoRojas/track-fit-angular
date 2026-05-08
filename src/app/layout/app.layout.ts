@@ -10,7 +10,13 @@ import { AppSidebar } from './app.sidebar';
   standalone: true,
   imports: [CommonModule, RouterOutlet, AppTopbar, AppSidebar],
   template: `
-    <div class="min-h-screen bg-surface-50 dark:bg-surface-950 transition-colors duration-200">
+    <div class="min-h-screen bg-surface-50 dark:bg-surface-950 transition-colors duration-200 relative overflow-hidden">
+      <!-- Decorative background blobs -->
+      <div class="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-primary-500/10 dark:bg-primary-600/5 blur-[120px]"></div>
+        <div class="absolute bottom-[5%] left-[-10%] w-[60%] h-[60%] rounded-full bg-primary-500/10 dark:bg-primary-600/5 blur-[120px]"></div>
+      </div>
+
       <!-- Header -->
       <app-topbar></app-topbar>
 

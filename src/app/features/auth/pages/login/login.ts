@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { DynamicForm } from '../../../../shared/components/dynamic-form/dynamic-form';
 import { loginConfig } from './login-config';
 import { Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   imports: [DynamicForm],
+  changeDetection: ChangeDetectionStrategy.Default,
   templateUrl: './login.html',
 })
 export class Login {

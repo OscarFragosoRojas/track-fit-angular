@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { LayoutService } from './service/layout.service';
@@ -9,8 +9,14 @@ import { AppSidebar } from './app.sidebar';
   selector: 'app-layout',
   standalone: true,
   imports: [CommonModule, RouterOutlet, AppTopbar, AppSidebar],
+  changeDetection: ChangeDetectionStrategy.Default,
   template: `
-    <div class="min-h-screen bg-surface-50 dark:bg-surface-950 transition-colors duration-200">
+    <div class="min-h-screen bg-surface-50 dark:bg-surface-950 transition-colors duration-200 relative overflow-x-hidden">
+      <!-- Decorative background blobs -->
+      <div class="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <div class="absolute top-[10%] right-[5%] w-[40%] h-[40%] rounded-full bg-blue-500/20 dark:bg-blue-600/10 blur-[120px]"></div>
+        <div class="absolute bottom-[10%] left-[10%] w-[50%] h-[50%] rounded-full bg-indigo-500/20 dark:bg-indigo-600/10 blur-[120px]"></div>
+      </div>
       <!-- Header -->
       <app-topbar></app-topbar>
 

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LayoutService } from './service/layout.service';
@@ -9,6 +9,7 @@ import { MenuItem } from 'primeng/api';
   selector: 'app-sidebar',
   standalone: true,
   imports: [CommonModule, RouterModule, MenuModule],
+  changeDetection: ChangeDetectionStrategy.Default,
   template: `
     <div
       class="fixed top-[72px] left-0 z-40 h-[calc(100vh-72px)] w-[18rem] bg-transparent transition-transform duration-300 flex flex-col py-6 px-4 overflow-y-auto"
@@ -18,21 +19,28 @@ import { MenuItem } from 'primeng/api';
           (!layoutService.state().staticMenuMobileActive && !layoutService.isDesktop()),
         'translate-x-0':
           (!layoutService.state().staticMenuDesktopInactive && layoutService.isDesktop()) ||
-          (layoutService.state().staticMenuMobileActive && !layoutService.isDesktop())
+          (layoutService.state().staticMenuMobileActive && !layoutService.isDesktop()),
       }"
     >
       <p-menu [model]="model" styleClass="w-full border-none bg-transparent">
         <ng-template pTemplate="submenuheader" let-item>
-          <div class="px-2 pt-5 pb-2 text-xs font-bold uppercase tracking-widest text-surface-400 dark:text-surface-500">
+          <div
+            class="px-2 pt-5 pb-2 text-xs font-bold uppercase tracking-widest text-surface-400 dark:text-surface-500"
+          >
             {{ item.label }}
           </div>
         </ng-template>
         <ng-template pTemplate="item" let-item>
-          <a [routerLink]="item.routerLink" 
-             routerLinkActive="bg-primary/10 text-primary font-semibold"
-             [routerLinkActiveOptions]="{exact: false}"
-             class="flex items-center gap-4 px-4 py-3 rounded-2xl text-surface-600 dark:text-surface-300 hover:bg-surface-100 dark:hover:bg-surface-800 hover:text-surface-900 dark:hover:text-surface-0 transition-all duration-300 cursor-pointer group outline-none mb-1">
-            <i [class]="item.icon" class="text-xl group-hover:scale-110 transition-transform duration-300"></i>
+          <a
+            [routerLink]="item.routerLink"
+            routerLinkActive="bg-primary/10 text-primary font-semibold"
+            [routerLinkActiveOptions]="{ exact: false }"
+            class="flex items-center gap-4 px-4 py-3 rounded-2xl text-surface-600 dark:text-surface-300 hover:bg-surface-100 dark:hover:bg-surface-800 hover:text-surface-900 dark:hover:text-surface-0 transition-all duration-300 cursor-pointer group outline-none mb-1"
+          >
+            <i
+              [class]="item.icon"
+              class="text-xl group-hover:scale-110 transition-transform duration-300"
+            ></i>
             <span class="text-[15px]">{{ item.label }}</span>
           </a>
         </ng-template>

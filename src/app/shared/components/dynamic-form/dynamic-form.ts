@@ -1,4 +1,4 @@
-import { Component, input, linkedSignal, output } from '@angular/core';
+import { Component, input, linkedSignal, output, ChangeDetectionStrategy } from '@angular/core';
 import { form, FormField, FormRoot } from '@angular/forms/signals';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -9,6 +9,7 @@ import { Button } from '../button/button';
 @Component({
   selector: 'app-dynamic-form',
   imports: [FormField, FormRoot, InputTextModule, Button, CheckboxModule, PasswordModule],
+  changeDetection: ChangeDetectionStrategy.Default,
   templateUrl: './dynamic-form.html',
 })
 export class DynamicForm {
@@ -31,8 +32,8 @@ export class DynamicForm {
         const values = f().value();
         console.log('Form values submitted:', values);
         this.onSubmit.emit(values);
-      }
-    }
+      },
+    },
   });
 
   getField(key: string): any {

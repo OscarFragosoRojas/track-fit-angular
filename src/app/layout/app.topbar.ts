@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { LayoutService } from './service/layout.service';
 import { ButtonModule } from 'primeng/button';
 import { RouterModule } from '@angular/router';
@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-topbar',
   standalone: true,
   imports: [ButtonModule, RouterModule],
+  changeDetection: ChangeDetectionStrategy.Default,
   template: `
     <nav
       class="fixed top-0 left-0 z-50 w-full h-[72px] flex items-center justify-between px-6 lg:px-8 bg-surface-0/70 dark:bg-surface-900/80 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] transition-all duration-300"

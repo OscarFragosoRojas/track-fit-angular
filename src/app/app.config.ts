@@ -5,7 +5,11 @@ import Aura from '@primeuix/themes/aura';
 import { definePreset } from '@primeuix/themes';
 
 import { routes } from './app.routes';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import {
+  provideClientHydration,
+  withEventReplay,
+  withNoIncrementalHydration,
+} from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 const TrackFitPreset = definePreset(Aura, {
@@ -21,7 +25,7 @@ const TrackFitPreset = definePreset(Aura, {
       700: '#4338ca',
       800: '#3730a3',
       900: '#312e81',
-      950: '#1e1b4b'
+      950: '#1e1b4b',
     },
     colorScheme: {
       light: {
@@ -29,31 +33,31 @@ const TrackFitPreset = definePreset(Aura, {
           color: '{primary.500}',
           inverseColor: '#ffffff',
           hoverColor: '{primary.600}',
-          activeColor: '{primary.700}'
+          activeColor: '{primary.700}',
         },
         highlight: {
           background: '{primary.50}',
           focusBackground: '{primary.100}',
           color: '{primary.700}',
-          focusColor: '{primary.800}'
-        }
+          focusColor: '{primary.800}',
+        },
       },
       dark: {
         primary: {
           color: '{primary.400}',
           inverseColor: '{surface.900}',
           hoverColor: '{primary.300}',
-          activeColor: '{primary.200}'
+          activeColor: '{primary.200}',
         },
         highlight: {
           background: 'color-mix(in srgb, {primary.400}, transparent 84%)',
           focusBackground: 'color-mix(in srgb, {primary.400}, transparent 76%)',
           color: 'rgba(255,255,255,.87)',
-          focusColor: 'rgba(255,255,255,.87)'
-        }
-      }
-    }
-  }
+          focusColor: 'rgba(255,255,255,.87)',
+        },
+      },
+    },
+  },
 });
 
 export const appConfig: ApplicationConfig = {
@@ -61,6 +65,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideAnimationsAsync(),
     providePrimeNG({ theme: { preset: TrackFitPreset } }),
-    provideRouter(routes), provideClientHydration(withEventReplay())
-  ]
+    provideRouter(routes),
+    provideClientHydration(withEventReplay(), withNoIncrementalHydration()),
+  ],
 };

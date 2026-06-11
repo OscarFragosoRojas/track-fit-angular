@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { DynamicForm } from "../../../../shared/components/dynamic-form/dynamic-form";
 import { registerConfig } from './register-config';
 
@@ -9,4 +10,12 @@ import { registerConfig } from './register-config';
 })
 export class Register {
   registerConfig = registerConfig;
+
+  constructor(
+    private router: Router,
+  ) { }
+
+  login() {
+    this.router.navigate(['/login']);
+  }
 }

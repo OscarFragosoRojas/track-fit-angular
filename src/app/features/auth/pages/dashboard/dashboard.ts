@@ -5,11 +5,12 @@ import { ChartModule } from 'primeng/chart';
 import { Card } from '../../../../shared/components/cards/card/card';
 import { CommonModule } from '@angular/common';
 import { AgendaList } from "../../../../shared/components/agenda-list/agenda-list";
+import { Header } from "../../../../shared/components/header/header";
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, StatCard, ChartModule, Card, AgendaList],
+  imports: [CommonModule, StatCard, ChartModule, Card, AgendaList, Header ],
   changeDetection: ChangeDetectionStrategy.Default,
   templateUrl: './dashboard.html',
 })

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule, NgClass } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import type { AgendaListType } from '../types/component-types';
 import { BadgeModule } from 'primeng/badge';
 import { getStatusLabel, getStatusSeverity } from '../../utils/agenda-status.util';

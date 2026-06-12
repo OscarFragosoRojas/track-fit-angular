@@ -7,48 +7,22 @@
     </div>
 
     <!-- Sección de Gráfico / Principal -->
-    <div class="col-span-12 lg:col-span-8">
-        <div class="bg-white/70 dark:bg-slate-900/60 backdrop-blur-xl border border-white/40 dark:border-slate-800 shadow-xl rounded-3xl p-6 h-full transition-all relative z-10">
-            <div class="font-medium text-xl mb-4 text-surface-900 dark:text-surface-0">Evolución de Pacientes</div>
-            <div class="h-[300px]">
-                <p-chart type="line" [data]="data" [options]="options" height="300px"></p-chart>
-            </div>
+    <app-card 
+        [size]="'col-span-12 lg:col-span-8'"
+        [title]="'Evolución de Pacientes'"
+        [hoverClass]="''">
+        <div class="h-[300px]">
+            <p-chart type="line" [data]="data" [options]="options" height="300px"></p-chart>
         </div>
-    </div>
+    </app-card>
 
     <!-- Sección Lateral / Tabla -->
-    <div class="col-span-12 lg:col-span-4">
-        <div class="bg-white/70 dark:bg-slate-900/60 backdrop-blur-xl border border-white/40 dark:border-slate-800 shadow-xl rounded-3xl p-6 h-full transition-all relative z-10">
-            <div class="font-medium text-xl mb-4 text-surface-900 dark:text-surface-0">Próximas Citas</div>
-            <ul class="p-0 m-0 list-none">
-                <li class="flex items-center py-4 border-b border-surface-200 dark:border-surface-700">
-                    <div class="w-10 h-10 flex items-center justify-center bg-primary-100 dark:bg-primary-900/40 rounded-full mr-3 shrink-0">
-                        <span class="text-primary-500 font-bold">JD</span>
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="text-surface-900 dark:text-surface-0 font-medium mb-1">Juan Domínguez</span>
-                        <span class="text-surface-500 text-sm">Hoy, 14:00 hrs</span>
-                    </div>
-                </li>
-                <li class="flex items-center py-4 border-b border-surface-200 dark:border-surface-700">
-                    <div class="w-10 h-10 flex items-center justify-center bg-green-100 dark:bg-green-900/40 rounded-full mr-3 shrink-0">
-                        <span class="text-green-500 font-bold">MR</span>
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="text-surface-900 dark:text-surface-0 font-medium mb-1">María Ruiz</span>
-                        <span class="text-surface-500 text-sm">Hoy, 15:30 hrs</span>
-                    </div>
-                </li>
-                <li class="flex items-center py-4 border-b border-surface-200 dark:border-surface-700">
-                    <div class="w-10 h-10 flex items-center justify-center bg-orange-100 dark:bg-orange-900/40 rounded-full mr-3 shrink-0">
-                        <span class="text-orange-500 font-bold">CJ</span>
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="text-surface-900 dark:text-surface-0 font-medium mb-1">Carlos Jiménez</span>
-                        <span class="text-surface-500 text-sm">Mañana, 09:00 hrs</span>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
+     <app-card 
+        [size]="'col-span-12 lg:col-span-4'"
+        [title]="'Próximas Citas'"
+        [hoverClass]="''">
+            <app-agenda-list
+                [listItems]="patientCards"
+                />
+    </app-card>
 </div>

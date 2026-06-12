@@ -1,11 +1,15 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { KPI } from '../../../../shared/components/types/component-types';
+import { AgendaListType, KPI } from '../../../../shared/components/types/component-types';
 import { StatCard } from '../../../../shared/components/cards/stat-card/stat-card';
 import { ChartModule } from 'primeng/chart';
+import { Card } from '../../../../shared/components/cards/card/card';
+import { CommonModule } from '@angular/common';
+import { AgendaList } from "../../../../shared/components/agenda-list/agenda-list";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [StatCard, ChartModule],
+  standalone: true,
+  imports: [CommonModule, StatCard, ChartModule, Card, AgendaList],
   changeDetection: ChangeDetectionStrategy.Default,
   templateUrl: './dashboard.html',
 })
@@ -109,4 +113,34 @@ export class Dashboard implements OnInit {
       comparisonLabel: 'sin leer',
     },
   ];
+
+ 
+  patientCards: AgendaListType = {
+    agendaItems: [
+    {
+      name: 'John Doe',
+      status: 'attended',
+      time: '10:30 AM',
+      image: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    },
+    {
+      name: 'Jane Smith',
+      status: 'pending',
+      time: '10:45 AM',
+      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    },
+    {
+      name: 'Alex Johnson',
+      status: 'in-consultation',
+      time: '11:00 AM',
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    },
+    {
+      name: 'Maria Garcia',
+      status: 'canceled',
+      time: '11:15 AM',
+      image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    }
+  ]
+ }
 }

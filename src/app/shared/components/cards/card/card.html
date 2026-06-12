@@ -1,28 +1,10 @@
-<div
-  class="rounded-2xl border-none shadow-sm transition-all duration-500 bg-surface-0 dark:bg-surface-900 {{ class }}">
-  <ng-template pTemplate="content">
-    <div class="p-6">
-      <div class="flex flex-col gap-4">
-        <!-- Header -->
-        @if (hasHeader) {
-        <div class="flex items-center justify-between gap-2">
-          <span class="text-xl font-semibold text-surface-900 dark:text-surface-0">Card Title</span>
-          <div class="flex items-center gap-2">
-            <button class="p-2 hover:bg-surface-100 dark:hover:bg-surface-800 rounded-full">
-              <i class="pi pi-ellipsis-v"></i>
-            </button>
-          </div>
-        </div>
-        }
-        <!-- Content -->
-        <p class="text-surface-600 dark:text-surface-400">Card Content</p>
-        <!-- Footer -->
-        @if (hasFooter) {
-        <div class="flex items-center gap-2">
-          <button class="px-4 py-2 hover:bg-surface-100 dark:hover:bg-surface-800 rounded-full">Button</button>
-        </div>
-        }
-      </div>
-    </div>
-  </ng-template>
-</div>
+<p-card 
+  [class]="'w-full h-full bg-white! dark:bg-primary-900/20! backdrop-blur-xl border border-primary-100/50 dark:border-primary-800/50 shadow-xl shadow-primary-900/5 dark:shadow-none ' + hoverClass + ' transition-all duration-500 relative overflow-hidden rounded-3xl group border-none!'"
+  [dt]="{ background: 'transparent' }"
+  [style]="{ 'padding': '0' }"
+>
+    <ng-template pTemplate="header">
+        <div class="font-medium text-xl p-4 text-surface-900 dark:text-surface-0">{{ title }}</div>
+    </ng-template>
+    <ng-content></ng-content>
+</p-card>

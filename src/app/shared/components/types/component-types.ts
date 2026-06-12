@@ -38,3 +38,15 @@ export interface KPI {
   trendColorClass?: string;
   comparisonLabel?: string;
 }
+
+export interface AgendaItem {
+  name: string;
+  status: string;
+  time: string;
+  image: string;
+  color?: string;
+}
+
+export interface AgendaListType {
+  agendaItems: AgendaItem[];
+}

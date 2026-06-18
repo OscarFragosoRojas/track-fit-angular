@@ -27,6 +27,21 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/auth/pages/dashboard/dashboard').then((m: any) => m.Dashboard),
       },
+      {
+        path: 'patients',
+        loadComponent: () =>
+          import('./features/patients/pages/list/patient-list').then((m) => m.PatientList),
+      },
+      {
+        path: 'patients/new',
+        loadComponent: () =>
+          import('./features/patients/pages/new/patient-new').then((m) => m.PatientNew),
+      },
+      {
+        path: 'patients/:id',
+        loadComponent: () =>
+          import('./features/patients/pages/detail/patient-detail').then((m) => m.PatientDetail),
+      },
     ],
   },
 ];

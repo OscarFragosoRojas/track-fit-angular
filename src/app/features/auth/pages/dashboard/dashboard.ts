@@ -6,17 +6,21 @@ import { Card } from '../../../../shared/components/cards/card/card';
 import { CommonModule } from '@angular/common';
 import { AgendaList } from "../../../../shared/components/agenda-list/agenda-list";
 import { Header } from "../../../../shared/components/header/header";
+import { TaskList, ClinicTask } from '../../../../shared/components/task-list/task-list';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, StatCard, ChartModule, Card, AgendaList, Header ],
+  imports: [CommonModule, StatCard, ChartModule, Card, AgendaList, Header, TaskList],
   changeDetection: ChangeDetectionStrategy.Default,
   templateUrl: './dashboard.html',
 })
 export class Dashboard implements OnInit {
   data: any;
   options: any;
+  pieData: any;
+  pieOptions: any;
+  user = 'Oscar Fragoso';
 
   ngOnInit() {
     let textColor = '#ffffff';
@@ -60,6 +64,36 @@ export class Dashboard implements OnInit {
         y: {
           ticks: { color: textColorSecondary },
           grid: { color: surfaceBorder, drawBorder: false }
+        }
+      }
+    };
+
+    this.pieData = {
+      labels: ['Pérdida de Peso', 'Hipertrofia', 'Mantenimiento'],
+      datasets: [
+        {
+          data: [45, 35, 20],
+          backgroundColor: [
+            textColor === '#ffffff' ? '#06b6d4' : 'var(--p-cyan-500)',
+            textColor === '#ffffff' ? '#f97316' : 'var(--p-orange-500)',
+            textColor === '#ffffff' ? '#22c55e' : 'var(--p-green-500)'
+          ],
+          borderWidth: 0
+        }
+      ]
+    };
+
+    this.pieOptions = {
+      maintainAspectRatio: false,
+      aspectRatio: 1,
+      cutout: '75%',
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            usePointStyle: true,
+            color: textColor
+          }
         }
       }
     };
@@ -144,4 +178,28 @@ export class Dashboard implements OnInit {
     }
   ]
  }
+
+  clinicTasks: ClinicTask[] = [
+    {
+      id: '1',
+      title: 'Subir plan nutricional de hipertrofia',
+      patient: 'Jane Smith',
+      completed: false,
+      type: 'urgent'
+    },
+    {
+      id: '2',
+      title: 'Revisar últimos exámenes de sangre',
+      patient: 'Alex Johnson',
+      completed: false,
+      type: 'routine'
+    },
+    {
+      id: '3',
+      title: 'Hacer seguimiento de dolor de rodilla',
+      patient: 'Maria Garcia',
+      completed: true,
+      type: 'followup'
+    }
+  ];
 }

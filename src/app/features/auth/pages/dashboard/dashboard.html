@@ -1,22 +1,14 @@
 <div class="grid grid-cols-12 gap-6">
     <!-- Header -->
-     <div class="col-span-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-4 mb-2">
-        <div class="flex flex-col">
-            <h1 class="text-lg md:text-2xl font-bold text-surface-900 dark:text-surface-0 m-0 tracking-tight">Bienvenido de vuelta,  👋</h1>
-            <span class="text-surface-500 dark:text-surface-400 font-medium mt-1">Aquí está tu resumen clínico y métricas del día.</span>
-        </div>
-
-        <div class="flex items-center gap-3">
-            <button class="px-4 py-2 rounded-xl bg-surface-0 dark:bg-surface-800 hover:bg-surface-100 dark:hover:bg-surface-700 text-surface-700 dark:text-surface-300 font-medium transition-colors flex items-center gap-2 border border-surface-200 dark:border-surface-700 shadow-sm">
-                <i class="pi pi-calendar"></i>
-                <span class="hidden sm:inline">Ver Agenda</span>
-            </button>
-            <button class="px-4 py-2 rounded-xl bg-primary-500 hover:bg-primary-600 text-white font-medium shadow-sm shadow-primary-500/20 transition-colors flex items-center gap-2">
-                <i class="pi pi-plus"></i>
-                <span>Nuevo Paciente</span>
-            </button>
-        </div>
-    </div>
+    <app-header 
+        [message]="'Bienvenido de vuelta ' + user + ' 👋'" 
+        [subtitle]="'Aquí está tu resumen clínico y métricas del día.'" 
+        [showBack]="false" 
+        [showCreate]="true" 
+        [createLabel]="'Nuevo Paciente'" 
+        [createLink]="'/patients/new'" 
+        class="col-span-12 block w-full mb-2">
+    </app-header>
         
     <!-- KPIS con cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 col-span-12">
@@ -45,22 +37,24 @@
                 />
     </app-card>
 
+     <!-- Sección de Tareas -->
      <app-card 
         [size]="'col-span-12 lg:col-span-8'"
-        [title]="'Próximas Citas'"
+        [title]="'Tareas Pendientes'"
         [hoverClass]="''">
-            <app-agenda-list
-                [listItems]="patientCards"
+            <app-task-list
+                [tasks]="clinicTasks"
                 />
     </app-card>
 
-     <app-card 
+    <!-- Gráfico de Distribución (Doughnut) -->
+    <app-card 
         [size]="'col-span-12 lg:col-span-4'"
-        [title]="'Próximas Citas'"
+        [title]="'Distribución de Planes'"
         [hoverClass]="''">
-            <app-agenda-list
-                [listItems]="patientCards"
-                />
+        <div class="h-[250px] flex items-center justify-center">
+            <p-chart type="doughnut" [data]="pieData" [options]="pieOptions" height="250px" class="w-full"></p-chart>
+        </div>
     </app-card>
 
 

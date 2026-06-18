@@ -1,0 +1,126 @@
+<div class="max-w-3xl mx-auto">
+    <!-- Page Header -->
+    <div class="mb-8">
+        <h1 class="text-2xl font-bold text-surface-900 dark:text-surface-0 tracking-tight m-0">Registro de Paciente</h1>
+        <p class="text-surface-500 dark:text-surface-400 mt-1 text-sm">Completa la información en los dos pasos para registrar al paciente.</p>
+    </div>
+
+    <!-- Stepper -->
+    <p-stepper [value]="activeStep()" class="w-full">
+
+        <!-- Step 1: Datos Personales -->
+        <p-step-list>
+            <p-step [value]="0">Datos Personales</p-step>
+            <p-step [value]="1">Métricas Físicas</p-step>
+        </p-step-list>
+
+        <p-step-panels>
+            <!-- Panel 1 -->
+            <p-step-panel [value]="0">
+                <ng-template #content>
+                    <form [formGroup]="personalForm" class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
+                        <!-- Nombre -->
+                        <div class="flex flex-col gap-1.5">
+                            <label for="firstName" class="text-sm font-medium text-surface-700 dark:text-surface-300">Nombre *</label>
+                            <input pInputText id="firstName" formControlName="firstName" placeholder="Ej. Jane" class="w-full" />
+                            @if (hasError('personal', 'firstName')) {
+                                <small class="text-red-500 text-xs">El nombre es requerido (mín. 2 caracteres).</small>
+                            }
+                        </div>
+                        <!-- Apellido -->
+                        <div class="flex flex-col gap-1.5">
+                            <label for="lastName" class="text-sm font-medium text-surface-700 dark:text-surface-300">Apellido *</label>
+                            <input pInputText id="lastName" formControlName="lastName" placeholder="Ej. Smith" class="w-full" />
+                            @if (hasError('personal', 'lastName')) {
+                                <small class="text-red-500 text-xs">El apellido es requerido (mín. 2 caracteres).</small>
+                            }
+                        </div>
+                        <!-- Email -->
+                        <div class="flex flex-col gap-1.5">
+                            <label for="email" class="text-sm font-medium text-surface-700 dark:text-surface-300">Correo Electrónico *</label>
+                            <input pInputText id="email" type="email" formControlName="email" placeholder="jane@email.com" class="w-full" />
+                            @if (hasError('personal', 'email')) {
+                                <small class="text-red-500 text-xs">Ingresa un correo válido.</small>
+                            }
+                        </div>
+                        <!-- Teléfono -->
+                        <div class="flex flex-col gap-1.5">
+                            <label for="phone" class="text-sm font-medium text-surface-700 dark:text-surface-300">Teléfono *</label>
+                            <input pInputText id="phone" formControlName="phone" placeholder="+52 55 1234 5678" class="w-full" />
+                            @if (hasError('personal', 'phone')) {
+                                <small class="text-red-500 text-xs">El teléfono es requerido.</small>
+                            }
+                        </div>
+                        <!-- Fecha de Nacimiento -->
+                        <div class="flex flex-col gap-1.5">
+                            <label for="dob" class="text-sm font-medium text-surface-700 dark:text-surface-300">Fecha de Nacimiento *</label>
+                            <p-datepicker id="dob" formControlName="dateOfBirth" dateFormat="dd/mm/yy" [showIcon]="true" placeholder="DD/MM/AAAA" styleClass="w-full" />
+                            @if (hasError('personal', 'dateOfBirth')) {
+                                <small class="text-red-500 text-xs">La fecha de nacimiento es requerida.</small>
+                            }
+                        </div>
+                        <!-- Género -->
+                        <div class="flex flex-col gap-1.5">
+                            <label for="gender" class="text-sm font-medium text-surface-700 dark:text-surface-300">Género *</label>
+                            <p-select id="gender" formControlName="gender" [options]="genderOptions" optionLabel="label" optionValue="value" placeholder="Selecciona género" styleClass="w-full" />
+                            @if (hasError('personal', 'gender')) {
+                                <small class="text-red-500 text-xs">El género es requerido.</small>
+                            }
+                        </div>
+                    </form>
+                    <!-- Actions -->
+                    <div class="flex justify-between mt-8">
+                        <app-button label="Cancelar" [outlined]="true" (onClick)="cancel()" />
+                        <app-button label="Siguiente" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextStep()" />
+                    </div>
+                </ng-template>
+            </p-step-panel>
+
+            <!-- Panel 2 -->
+            <p-step-panel [value]="1">
+                <ng-template #content>
+                    <form [formGroup]="statsForm" class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
+                        <!-- Altura -->
+                        <div class="flex flex-col gap-1.5">
+                            <label for="height" class="text-sm font-medium text-surface-700 dark:text-surface-300">Altura (cm) *</label>
+                            <p-inputnumber id="height" formControlName="heightCm" [min]="100" [max]="250" suffix=" cm" placeholder="Ej. 170" styleClass="w-full" />
+                            @if (hasError('stats', 'heightCm')) {
+                                <small class="text-red-500 text-xs">Altura requerida (100–250 cm).</small>
+                            }
+                        </div>
+                        <!-- Peso -->
+                        <div class="flex flex-col gap-1.5">
+                            <label for="weight" class="text-sm font-medium text-surface-700 dark:text-surface-300">Peso (kg) *</label>
+                            <p-inputnumber id="weight" formControlName="weightKg" [min]="20" [max]="300" [minFractionDigits]="1" suffix=" kg" placeholder="Ej. 70.5" styleClass="w-full" />
+                            @if (hasError('stats', 'weightKg')) {
+                                <small class="text-red-500 text-xs">Peso requerido (20–300 kg).</small>
+                            }
+                        </div>
+                        <!-- % Grasa Corporal -->
+                        <div class="flex flex-col gap-1.5">
+                            <label for="bodyFat" class="text-sm font-medium text-surface-700 dark:text-surface-300">% Grasa Corporal <span class="text-surface-400 text-xs">(opcional)</span></label>
+                            <p-inputnumber id="bodyFat" formControlName="bodyFatPct" [min]="1" [max]="70" [minFractionDigits]="1" suffix=" %" placeholder="Ej. 22.5" styleClass="w-full" />
+                        </div>
+                        <!-- Objetivo -->
+                        <div class="flex flex-col gap-1.5">
+                            <label for="goal" class="text-sm font-medium text-surface-700 dark:text-surface-300">Objetivo *</label>
+                            <p-select id="goal" formControlName="goal" [options]="goalOptions" optionLabel="label" optionValue="value" placeholder="Selecciona objetivo" styleClass="w-full" />
+                            @if (hasError('stats', 'goal')) {
+                                <small class="text-red-500 text-xs">El objetivo es requerido.</small>
+                            }
+                        </div>
+                    </form>
+                    <!-- Actions -->
+                    <div class="flex justify-between mt-8">
+                        <app-button label="Atrás" icon="pi pi-arrow-left" [outlined]="true" (onClick)="prevStep()" />
+                        <app-button
+                            label="Guardar Paciente"
+                            icon="pi pi-check"
+                            [disabled]="isSubmitting()"
+                            (onClick)="submit()" />
+                    </div>
+                </ng-template>
+            </p-step-panel>
+        </p-step-panels>
+    </p-stepper>
+</div>

@@ -3,6 +3,7 @@ import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-button',
+  standalone: true,
   imports: [ButtonModule],
   changeDetection: ChangeDetectionStrategy.Default,
   templateUrl: './button.html',

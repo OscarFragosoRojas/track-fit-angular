@@ -1,0 +1,124 @@
+@if (patient(); as p) {
+    <!-- Back button + Header -->
+    <div class="mb-6">
+        <app-button label="Volver a Pacientes" icon="pi pi-arrow-left" [text]="true" (onClick)="goBack()" />
+    </div>
+
+    <!-- Profile Card -->
+    <div class="flex flex-col md:flex-row items-start md:items-center gap-6 p-6 bg-white dark:bg-surface-900 rounded-3xl border border-surface-100 dark:border-surface-800 shadow-sm mb-6">
+        <!-- Avatar -->
+        <div class="w-20 h-20 rounded-full overflow-hidden bg-primary-100 dark:bg-primary-900/40 flex items-center justify-center shrink-0 border-4 border-surface-100 dark:border-surface-800">
+            @if (p.avatar) {
+                <img [src]="p.avatar" [alt]="p.firstName" class="w-full h-full object-cover" />
+            } @else {
+                <span class="text-primary-500 font-bold text-3xl">{{ p.firstName.charAt(0) }}</span>
+            }
+        </div>
+        <!-- Info -->
+        <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-3 mb-1">
+                <h1 class="text-2xl font-bold text-surface-900 dark:text-surface-0 m-0">{{ p.firstName }} {{ p.lastName }}</h1>
+                <p-badge [value]="statusLabel()" [severity]="$any(statusSev())" />
+                <p-badge [value]="goalLabel()" [severity]="$any(goalSev())" />
+            </div>
+            <p class="text-surface-500 dark:text-surface-400 m-0 text-sm">{{ p.email }} · {{ p.phone }}</p>
+        </div>
+        <!-- Actions -->
+        <div class="flex gap-2">
+            <app-button label="Editar" icon="pi pi-pencil" [outlined]="true" size="small" />
+            <app-button label="Nueva Cita" icon="pi pi-calendar-plus" size="small" />
+        </div>
+    </div>
+
+    <!-- Tabs -->
+    <p-tabs value="profile">
+        <p-tablist>
+            <p-tab value="profile">Perfil</p-tab>
+            <p-tab value="history">Historial de Consultas</p-tab>
+            <p-tab value="plans">Planes</p-tab>
+        </p-tablist>
+
+        <p-tabpanels>
+            <!-- Profile Tab -->
+            <p-tabpanel value="profile">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                    <!-- Datos Personales -->
+                    <div class="bg-white dark:bg-surface-900 rounded-2xl border border-surface-100 dark:border-surface-800 p-5">
+                        <h2 class="text-base font-semibold text-surface-900 dark:text-surface-0 mb-4 mt-0">Datos Personales</h2>
+                        <dl class="flex flex-col gap-3">
+                            <div class="flex justify-between">
+                                <dt class="text-sm text-surface-500">Nombre completo</dt>
+                                <dd class="text-sm font-medium text-surface-900 dark:text-surface-0 m-0">{{ p.firstName }} {{ p.lastName }}</dd>
+                            </div>
+                            <div class="flex justify-between">
+                                <dt class="text-sm text-surface-500">Correo</dt>
+                                <dd class="text-sm font-medium text-surface-900 dark:text-surface-0 m-0">{{ p.email }}</dd>
+                            </div>
+                            <div class="flex justify-between">
+                                <dt class="text-sm text-surface-500">Teléfono</dt>
+                                <dd class="text-sm font-medium text-surface-900 dark:text-surface-0 m-0">{{ p.phone }}</dd>
+                            </div>
+                            <div class="flex justify-between">
+                                <dt class="text-sm text-surface-500">Edad</dt>
+                                <dd class="text-sm font-medium text-surface-900 dark:text-surface-0 m-0">{{ getAge(p.dateOfBirth) }} años</dd>
+                            </div>
+                            <div class="flex justify-between">
+                                <dt class="text-sm text-surface-500">Género</dt>
+                                <dd class="text-sm font-medium text-surface-900 dark:text-surface-0 m-0 capitalize">{{ p.gender }}</dd>
+                            </div>
+                            <div class="flex justify-between">
+                                <dt class="text-sm text-surface-500">Registro</dt>
+                                <dd class="text-sm font-medium text-surface-900 dark:text-surface-0 m-0">{{ p.createdAt | date:'dd/MM/yyyy' }}</dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <!-- Métricas Físicas -->
+                    <div class="bg-white dark:bg-surface-900 rounded-2xl border border-surface-100 dark:border-surface-800 p-5">
+                        <h2 class="text-base font-semibold text-surface-900 dark:text-surface-0 mb-4 mt-0">Métricas Físicas</h2>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-primary-50 dark:bg-primary-900/20 rounded-xl p-4 text-center">
+                                <span class="text-2xl font-bold text-primary-600 dark:text-primary-400">{{ p.physicalStats.weightKg }}</span>
+                                <span class="text-xs text-surface-500 block mt-0.5">kg — Peso</span>
+                            </div>
+                            <div class="bg-cyan-50 dark:bg-cyan-900/20 rounded-xl p-4 text-center">
+                                <span class="text-2xl font-bold text-cyan-600 dark:text-cyan-400">{{ p.physicalStats.heightCm }}</span>
+                                <span class="text-xs text-surface-500 block mt-0.5">cm — Altura</span>
+                            </div>
+                            @if (p.physicalStats.bodyFatPct) {
+                                <div class="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-4 text-center col-span-2">
+                                    <span class="text-2xl font-bold text-orange-600 dark:text-orange-400">{{ p.physicalStats.bodyFatPct }}%</span>
+                                    <span class="text-xs text-surface-500 block mt-0.5">Grasa Corporal</span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </p-tabpanel>
+
+            <!-- History Tab (placeholder) -->
+            <p-tabpanel value="history">
+                <div class="flex flex-col items-center justify-center py-16 text-surface-400 dark:text-surface-500">
+                    <i class="pi pi-calendar text-5xl mb-4 opacity-30"></i>
+                    <p class="text-sm m-0">No hay consultas registradas aún.</p>
+                    <app-button label="Agendar Primera Cita" icon="pi pi-plus" size="small" styleClass="mt-4" />
+                </div>
+            </p-tabpanel>
+
+            <!-- Plans Tab (placeholder) -->
+            <p-tabpanel value="plans">
+                <div class="flex flex-col items-center justify-center py-16 text-surface-400 dark:text-surface-500">
+                    <i class="pi pi-file text-5xl mb-4 opacity-30"></i>
+                    <p class="text-sm m-0">No hay planes asignados aún.</p>
+                    <app-button label="Crear Plan" icon="pi pi-plus" size="small" styleClass="mt-4" />
+                </div>
+            </p-tabpanel>
+        </p-tabpanels>
+    </p-tabs>
+
+} @else {
+    <div class="flex flex-col items-center justify-center py-24 text-surface-400 dark:text-surface-500">
+        <i class="pi pi-exclamation-triangle text-5xl mb-4 opacity-30"></i>
+        <p class="text-sm m-0">Paciente no encontrado.</p>
+        <app-button label="Volver" icon="pi pi-arrow-left" [text]="true" (onClick)="goBack()" />
+    </div>
+}

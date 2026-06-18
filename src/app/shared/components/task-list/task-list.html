@@ -1,0 +1,41 @@
+<div class="px-4 pb-4">
+    <div class="flex items-center justify-between mb-4">
+        <span class="text-sm font-medium text-surface-500 dark:text-surface-400">Generadas de tus consultas recientes</span>
+        <span class="text-xs bg-primary-50 dark:bg-primary-900/40 text-primary-600 dark:text-primary-400 font-bold px-2 py-1 rounded-md">{{ getCompletedCount() }}/{{ tasks.length }}</span>
+    </div>
+
+    <ul class="p-0 m-0 list-none space-y-3">
+        @for (task of tasks; track task.id) {
+            <li class="flex items-start p-3 rounded-2xl transition-all duration-300 border border-surface-100 dark:border-surface-800"
+                [ngClass]="{'bg-surface-50 dark:bg-surface-800/30 opacity-60': task.completed, 'bg-white dark:bg-surface-900/80 shadow-sm hover:border-primary-200': !task.completed}">
+                
+                <!-- PrimeNG Checkbox -->
+                <div class="mt-0.5 shrink-0 mr-3">
+                    <p-checkbox [(ngModel)]="task.completed" [binary]="true"></p-checkbox>
+                </div>
+
+                <!-- Task Content -->
+                <div class="flex-1 flex flex-col min-w-0 cursor-pointer" (click)="toggleTask(task)">
+                    <span class="text-sm font-semibold text-surface-900 dark:text-surface-0 transition-all duration-300"
+                          [ngClass]="{'line-through text-surface-400 dark:text-surface-500': task.completed}">
+                        {{ task.title }}
+                    </span>
+                    
+                    <div class="flex items-center gap-3 mt-2">
+                        <span class="text-xs flex items-center text-surface-500 dark:text-surface-400">
+                            <i class="pi pi-user mr-1 text-[10px]"></i>
+                            {{ task.patient }}
+                        </span>
+                        
+                        <!-- PrimeNG Badge -->
+                        <p-badge 
+                            [value]="task.type === 'urgent' ? 'Urgente' : (task.type === 'routine' ? 'Rutina' : 'Seguimiento')"
+                            [severity]="task.type === 'urgent' ? 'danger' : (task.type === 'routine' ? 'info' : 'success')"
+                            styleClass="text-[10px] uppercase tracking-wider">
+                        </p-badge>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+</div>

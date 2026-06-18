@@ -1,0 +1,112 @@
+<p-toast />
+<p-confirmdialog />
+
+<!-- Page Header -->
+<app-header 
+    [message]="'Tus pacientes'" 
+    [subtitle]="filteredPatients().length + ' paciente(s) registrado(s)'"  
+    [showCreate]="true" 
+    [createLabel]="'Nuevo paciente'" 
+    (onCreate)="navigateToNew()" 
+    class="col-span-12 block w-full mb-4">
+</app-header>
+
+<!-- Search -->
+<div class="mb-4">
+    <p-iconfield>
+        <p-inputicon styleClass="pi pi-search" />
+        <input pInputText type="text" placeholder="Buscar por nombre o correo..." class="w-full md:w-80"
+               [value]="searchQuery()"
+               (input)="searchQuery.set($any($event.target).value)" />
+    </p-iconfield>
+</div>
+
+<!-- Table -->
+<p-table
+    [value]="filteredPatients()"
+    [paginator]="true"
+    [rows]="8"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="{first}–{last} de {totalRecords} pacientes"
+    [rowsPerPageOptions]="[5, 8, 15]"
+    styleClass="p-datatable-sm"
+    [tableStyle]="{'min-width': '60rem'}">
+
+    <ng-template #header>
+        <tr>
+            <th class="w-12"></th>
+            <th pSortableColumn="firstName">Nombre <p-sortIcon field="firstName" /></th>
+            <th>Correo</th>
+            <th>Edad</th>
+            <th>Objetivo</th>
+            <th>Estado</th>
+            <th>Registro</th>
+            <th class="text-center">Acciones</th>
+        </tr>
+    </ng-template>
+
+    <ng-template #body let-patient>
+        <tr class="hover:bg-surface-50 dark:hover:bg-surface-800/50 cursor-pointer transition-colors"
+            (click)="navigateToDetail(patient.id)">
+
+            <!-- Avatar -->
+            <td (click)="$event.stopPropagation()">
+                <div class="w-9 h-9 rounded-full overflow-hidden bg-primary-100 dark:bg-primary-900/40 flex items-center justify-center shrink-0">
+                    @if (patient.avatar) {
+                        <img [src]="patient.avatar" [alt]="patient.firstName" class="w-full h-full object-cover" />
+                    } @else {
+                        <span class="text-primary-500 font-bold text-sm">{{ patient.firstName.charAt(0) }}</span>
+                    }
+                </div>
+            </td>
+
+            <!-- Nombre -->
+            <td>
+                <div class="font-semibold text-surface-900 dark:text-surface-0">{{ patient.firstName }} {{ patient.lastName }}</div>
+                <div class="text-xs text-surface-500 dark:text-surface-400">{{ patient.phone }}</div>
+            </td>
+
+            <!-- Email -->
+            <td class="text-surface-600 dark:text-surface-400">{{ patient.email }}</td>
+
+            <!-- Edad -->
+            <td class="text-surface-700 dark:text-surface-300">{{ getAge(patient.dateOfBirth) }} años</td>
+
+            <!-- Objetivo -->
+            <td>
+                <p-badge [value]="goalLabel(patient)" [severity]="$any(goalSeverity(patient))" />
+            </td>
+
+            <!-- Estado -->
+            <td>
+                <p-badge [value]="statusLabel(patient)" [severity]="$any(statusSeverity(patient))" />
+            </td>
+
+            <!-- Fecha Registro -->
+            <td class="text-surface-500 dark:text-surface-400 text-sm">
+                {{ patient.createdAt | date:'dd/MM/yyyy' }}
+            </td>
+
+            <!-- Acciones -->
+            <td (click)="$event.stopPropagation()">
+                <div class="flex items-center justify-center gap-2">
+                    <app-button icon="pi pi-eye" [text]="true" [rounded]="true" size="small"
+                        pTooltip="Ver detalle" tooltipPosition="top"
+                        (onClick)="navigateToDetail(patient.id)" />
+                    <app-button icon="pi pi-trash" [text]="true" [rounded]="true" size="small" severity="danger"
+                        pTooltip="Eliminar" tooltipPosition="top"
+                        (onClick)="confirmDelete(patient)" />
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+
+    <ng-template #empty>
+        <tr>
+            <td colspan="8" class="text-center py-12 text-surface-500 dark:text-surface-400">
+                <i class="pi pi-users text-4xl block mb-3 opacity-30"></i>
+                <p class="m-0">No se encontraron pacientes.</p>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

@@ -10,10 +10,11 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-import { Button } from '../../../../shared/components/button/button';
 import { PatientService } from '../../../../core/services/patient.service';
 import { Header } from '../../../../shared/components/header/header';
 import { Patient, GOAL_LABELS, GOAL_SEVERITY, STATUS_LABELS, STATUS_SEVERITY } from '../../../../core/models/patient.model';
+import { TableComponent } from '../../../../shared/components/table/table';
+import { PATIENT_COLUMNS } from './columns';
 
 @Component({
   selector: 'app-patient-list',
@@ -28,9 +29,9 @@ import { Patient, GOAL_LABELS, GOAL_SEVERITY, STATUS_LABELS, STATUS_SEVERITY } f
     TooltipModule,
     ConfirmDialogModule,
     ToastModule,
-    Button,
     Header,
-  ],
+    TableComponent
+],
   providers: [ConfirmationService, MessageService],
   templateUrl: './patient-list.html',
 })
@@ -41,6 +42,7 @@ export class PatientList {
   private messageSvc = inject(MessageService);
 
   patients = this.patientService.patients;
+  columns = PATIENT_COLUMNS;
   searchQuery = signal('');
 
   filteredPatients = computed(() => {

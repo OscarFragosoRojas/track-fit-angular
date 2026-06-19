@@ -1,58 +1,37 @@
 <div class="grid grid-cols-12 gap-6">
     <!-- Header -->
-    <app-header 
-        [message]="'Bienvenido de vuelta ' + user + ' 👋'" 
-        [subtitle]="'Aquí está tu resumen clínico y métricas del día.'" 
-        [showBack]="false" 
-        [showCreate]="true" 
-        [createLabel]="'Nuevo Paciente'" 
-        [createLink]="'/patients/new'" 
-        class="col-span-12 block w-full mb-2">
+    <app-header [message]="'Bienvenido de vuelta ' + user + ' 👋'"
+        [subtitle]="'Aquí está tu resumen clínico y métricas del día.'" [showBack]="false" [showCreate]="true"
+        [createLabel]="'Nuevo Paciente'" [createLink]="'/patients/new'" class="col-span-12 block w-full mb-2">
     </app-header>
-        
+
     <!-- KPIS con cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 col-span-12">
         @for (statCard of statCards; track $index) {
-            <app-stat-card [kpi]="statCard"></app-stat-card>
+        <app-stat-card [kpi]="statCard"></app-stat-card>
         }
     </div>
 
     <!-- Sección de Gráfico / Principal -->
-    <app-card 
-        [size]="'col-span-12 lg:col-span-8'"
-        [title]="'Evolución de Pacientes'"
-        [hoverClass]="''">
-        <div class="h-[300px]">
+    <app-card [size]="'col-span-12 lg:col-span-8'" [title]="'Evolución de Pacientes'" [hoverClass]="''">
+        <div class="h-75">
             <p-chart type="line" [data]="data" [options]="options" height="300px"></p-chart>
         </div>
     </app-card>
 
     <!-- Sección Lateral / Tabla -->
-     <app-card 
-        [size]="'col-span-12 lg:col-span-4'"
-        [title]="'Próximas Citas'"
-        [hoverClass]="''">
-            <app-agenda-list
-                [listItems]="patientCards"
-                />
+    <app-card [size]="'col-span-12 lg:col-span-4'" [title]="'Próximas Citas'" [hoverClass]="''">
+        <app-agenda-list [listItems]="patientCards" />
     </app-card>
 
-     <!-- Sección de Tareas -->
-     <app-card 
-        [size]="'col-span-12 lg:col-span-8'"
-        [title]="'Tareas Pendientes'"
-        [hoverClass]="''">
-            <app-task-list
-                [tasks]="clinicTasks"
-                />
+    <!-- Sección de Tareas -->
+    <app-card [size]="'col-span-12 lg:col-span-8'" [title]="'Tareas Pendientes'" [hoverClass]="''">
+        <app-task-list [tasks]="clinicTasks" />
     </app-card>
 
     <!-- Gráfico de Distribución (Doughnut) -->
-    <app-card 
-        [size]="'col-span-12 lg:col-span-4'"
-        [title]="'Distribución de Planes'"
-        [hoverClass]="''">
-        <div class="h-[250px] flex items-center justify-center">
+    <app-card [size]="'col-span-12 lg:col-span-4'" [title]="'Distribución de Planes'" [hoverClass]="''">
+        <div class="h-62.5 flex items-center justify-center">
             <p-chart type="doughnut" [data]="pieData" [options]="pieOptions" height="250px" class="w-full"></p-chart>
         </div>
     </app-card>

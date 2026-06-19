@@ -2,13 +2,22 @@ import { TableColumn } from "../../../../shared/components/table/types/table-typ
 
 export const PATIENT_COLUMNS: TableColumn[] = [
     {
-        field: 'name',
+        field: 'id',
+        header: 'ID'
+    },
+    {
+        field: 'firstName',
         header: 'Nombre'
     },
     {
         field: 'email',
         header: 'Correo',
     },
+    {
+        field: 'phone',
+        header: 'Teléfono',
+    },
+
     {
         field: 'goal',
         header: 'Meta',

@@ -25,24 +25,5 @@ export class TableComponent<T> {
 
     clear(table: Table) {
         table.clear();
-      }
-
-    getSeverity(status: string) {
-        switch (status) {
-            case 'unqualified':
-                return 'danger';
-        
-            case 'qualified':
-                return 'success';
-        
-            case 'new':
-                return 'info';
-        
-            case 'negotiation':
-                return 'warn';
-        
-            case 'renewal':
-                return null;
-        }
     }
 }

@@ -44,7 +44,7 @@
 .p-paginator {
     /* Fondo transparente para las celdas para que tomen el blanco de la tarjeta */
     background-color: transparent !important; 
-    border-color: rgba(219, 234, 254, 0.8) !important; /* Bordes Primary-100 (Azul muy claro) */
+    border-color: rgba(219, 234, 254, 0.8) !important;
 }
 
 .p-datatable .p-datatable-thead > tr > th {
@@ -63,61 +63,34 @@
 }
 
 /* --- MODO OSCURO (Dark Mode) --- */
-/* En Tailwind v4, el modo oscuro a menudo usa prefers-color-scheme */
-@media (prefers-color-scheme: dark) {
-    .p-datatable .p-datatable-header,
-    .p-datatable .p-datatable-thead > tr > th,
-    .p-datatable .p-datatable-tbody > tr > td,
-    .p-datatable .p-paginator,
-    .p-paginator {
-        background-color: transparent !important; 
-        border-color: rgba(255, 255, 255, 0.05) !important; 
-    }
-
-    .p-datatable .p-datatable-thead > tr > th {
-        /* SOLO oscurecemos la cabecera */
-        background-color: rgba(0, 0, 0, 0.4) !important; 
-    }
-
-    .p-datatable .p-datatable-tbody > tr {
-        /* Las filas se quedan con el mismo azul (transparente hereda la tarjeta) */
-        background-color: transparent !important;
-    }
-
-    .p-datatable .p-datatable-tbody > tr:hover {
-        /* Hover con un brillo sutil blanco/cristal */
-        background-color: rgba(255, 255, 255, 0.03) !important; 
-    }
-
-    .p-paginator {
-        /* Paginador también transparente para heredar el azul */
-        background-color: transparent !important;
-    }
-}
-
-/* También aplicamos los mismos estilos si la clase .dark está presente en html/body (ej. switch manual) */
+/* En modo oscuro la tarjeta es dark:bg-primary-900/20 */
 .dark .p-datatable .p-datatable-header,
 .dark .p-datatable .p-datatable-thead > tr > th,
 .dark .p-datatable .p-datatable-tbody > tr > td,
 .dark .p-datatable .p-paginator,
 .dark .p-paginator {
+    /* Transparente en celdas para no apilar */
     background-color: transparent !important; 
-    border-color: rgba(255, 255, 255, 0.05) !important; 
+    border-color: rgba(255, 255, 255, 0.05) !important; /* Borde sutil blanco cristalino */
 }
 
 .dark .p-datatable .p-datatable-thead > tr > th {
-    background-color: rgba(0, 0, 0, 0.4) !important; 
+    /* Cabecera oscurecida sobre el azul de la tarjeta */
+    background-color: rgba(0, 0, 0, 0.5) !important; 
 }
 
 .dark .p-datatable .p-datatable-tbody > tr {
-    background-color: transparent !important;
+    /* Filas con sombra oscura */
+    background-color: rgba(0, 0, 0, 0.3) !important;
 }
 
 .dark .p-datatable .p-datatable-tbody > tr:hover {
-    background-color: rgba(255, 255, 255, 0.03) !important; 
+    /* Hover iluminado sutilmente */
+    background-color: rgba(0, 0, 0, 0.1) !important; 
 }
 
 .dark .p-paginator {
-    background-color: transparent !important;
+    /* Paginador integrado oscurecido */
+    background-color: rgba(0, 0, 0, 0.4) !important;
 }
 

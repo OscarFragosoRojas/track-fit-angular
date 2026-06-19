@@ -1,28 +1,41 @@
-<div class="card">
-    <p-table #dt2 [value]="data()" dataKey="id" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true"
-        [tableStyle]="{ 'min-width': '75rem' }">
+<app-card 
+    [size]="'col-span-12 lg:col-span-12'" 
+    [hoverClass]="''"
+>
+    <p-table #dt2 
+        [value]="data()" 
+        dataKey="id" 
+        [rows]="10"
+        [paginator]="true"
+        [tableStyle]="{ 'min-width': '75rem', 'background': 'transparent' }"
+        [class]="'w-full h-full bg-white! dark:bg-primary-900/20! backdrop-blur-xl border border-primary-100/50 dark:border-primary-900/50 shadow-xl shadow-primary-900/5 dark:shadow-none transition-all duration-500 relative overflow-hidden rounded-3xl group border-none!'"
+    >
         <ng-template #caption>
             <div class="flex">
                 <p-iconfield iconPosition="left" class="ml-auto">
                     <p-inputicon>
                         <i class="pi pi-search"></i>
                     </p-inputicon>
-                    <input pInputText type="text" (input)="dt2.filterGlobal($event.target.value, 'contains')"
-                        placeholder="Search keyword" />
+                    <input pInputText 
+                        type="text" 
+                        (input)="dt2.filterGlobal($event.target.value, 'contains')"
+                        [placeholder]="searchPlaceholder()"
+                        class="w-full bg-slate-50! dark:bg-slate-800/50! border-slate-200! dark:border-slate-700! focus:ring-2! focus:ring-blue-500/50! dark:text-white! transition-all duration-300!" 
+                    />
                 </p-iconfield>
             </div>
         </ng-template>
         <ng-template #header>
             <tr>
                 @for (col of columns(); track col.field) {
-                <th>{{ col.header }}</th>
+                <th class="text-center!">{{ col.header }}</th>
                 }
             </tr>
         </ng-template>
         <ng-template #body let-row>
             <tr>
                 @for (col of columns(); track col.field) {
-                <td>
+                <td class="text-center!">
                     {{ (row)[col.field] }}
                 </td>
                 }
@@ -30,8 +43,8 @@
         </ng-template>
         <ng-template #emptymessage>
             <tr>
-                <td colspan="5">No customers found.</td>
+                <td colspan="5">No se encontraron resultados.</td>
             </tr>
         </ng-template>
     </p-table>
-</div>
+</app-card>

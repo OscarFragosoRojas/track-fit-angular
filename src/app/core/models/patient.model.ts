@@ -11,6 +11,7 @@ export interface PhysicalStats {
 
 export interface Patient {
   id: string;
+  fullName: string;
   firstName: string;
   lastName: string;
   email: string;

@@ -23,6 +23,7 @@ export class TableComponent<T> {
     data = input.required<T[]>();
     columns = input.required<TableColumn[]>();
     searchPlaceholder = input<string>('Buscar...');
+    title = input<string>('');
 
 
     clear(table: Table) {

@@ -2,17 +2,11 @@
 <p-confirmdialog />
 
 <!-- Page Header -->
-<app-header 
-    [message]="'Tus pacientes'" 
-    [subtitle]="filteredPatients().length + ' paciente(s) registrado(s)'"  
-    [showCreate]="true" 
-    [createLabel]="'Nuevo paciente'" 
-    (onCreate)="navigateToNew()" 
-    class="col-span-12 block w-full mb-4">
+<app-header [message]="'Panel de control de pacientes'"
+    [subtitle]="filteredPatients().length + ' paciente(s) registrados'" [showCreate]="true"
+    [createLabel]="'Nuevo paciente'" (onCreate)="navigateToNew()" class="col-span-12 block w-full mb-4">
 </app-header>
 
 <!-- Table -->
-<app-table
-    [columns]="columns"
-    [data]="filteredPatients()" 
-    >
+<app-table [title]="'Directorio Activo'" [columns]="columns" [data]="filteredPatients()">
+</app-table>

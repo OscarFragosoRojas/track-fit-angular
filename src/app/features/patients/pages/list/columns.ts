@@ -1,4 +1,8 @@
 import { TableColumn } from "../../../../shared/components/table/types/table-types";
+import { Patient } from "../../../../core/models/patient.model";
+import { AvatarModule } from "primeng/avatar";
+import { AvatarGroupModule } from "primeng/avatargroup";
+import { GOAL_LABELS } from "../../../../core/models/patient.model";
 
 export const PATIENT_COLUMNS: TableColumn[] = [
     {
@@ -6,7 +10,7 @@ export const PATIENT_COLUMNS: TableColumn[] = [
         header: 'ID'
     },
     {
-        field: 'firstName',
+        field: 'fullName',
         header: 'Nombre'
     },
     {

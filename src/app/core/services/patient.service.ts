@@ -4,6 +4,7 @@ import { Patient, CreatePatientDto, PatientStatus } from '../models/patient.mode
 const MOCK_PATIENTS: Patient[] = [
   {
     id: '1',
+    fullName: 'Jane Smith',
     firstName: 'Jane',
     lastName: 'Smith',
     email: 'jane.smith@email.com',
@@ -17,6 +18,7 @@ const MOCK_PATIENTS: Patient[] = [
   },
   {
     id: '2',
+    fullName: 'Alex Johnson',
     firstName: 'Alex',
     lastName: 'Johnson',
     email: 'alex.johnson@email.com',
@@ -30,6 +32,7 @@ const MOCK_PATIENTS: Patient[] = [
   },
   {
     id: '3',
+    fullName: 'Maria Garcia',
     firstName: 'Maria',
     lastName: 'Garcia',
     email: 'maria.garcia@email.com',
@@ -43,6 +46,7 @@ const MOCK_PATIENTS: Patient[] = [
   },
   {
     id: '4',
+    fullName: 'John Doe',
     firstName: 'John',
     lastName: 'Doe',
     email: 'john.doe@email.com',
@@ -69,6 +73,7 @@ export class PatientService {
   create(dto: CreatePatientDto): Patient {
     const newPatient: Patient = {
       ...dto,
+      fullName: `${dto.firstName} ${dto.lastName}`,
       id: crypto.randomUUID(),
       status: 'pending' as PatientStatus,
       createdAt: new Date().toISOString(),

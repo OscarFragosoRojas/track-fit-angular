@@ -36,34 +36,28 @@
 /* Table Contextual Overrides */
 
 /* --- MODO CLARO (Light Mode) --- */
-/* En modo claro la tarjeta es blanca (bg-white), queremos colores muy suaves */
 .p-datatable .p-datatable-header,
 .p-datatable .p-datatable-thead > tr > th,
 .p-datatable .p-datatable-tbody > tr > td,
 .p-datatable .p-paginator,
 .p-paginator {
-    /* Fondo transparente para las celdas para que tomen el blanco de la tarjeta */
-    background-color: transparent !important; 
+    background-color: transparent !important;
     border-color: rgba(219, 234, 254, 0.8) !important;
 }
 
 .p-datatable .p-datatable-thead > tr > th {
-    /* Cabecera en Primary-50 (Casi blanco con un levísimo toque azul) para diferenciar */
-    background-color: rgba(239, 246, 255, 0.9) !important; 
+    background-color: rgba(239, 246, 255, 0.9) !important;
 }
 
 .p-datatable .p-datatable-tbody > tr {
-    /* Filas transparentes (blancas) */
     background-color: transparent !important;
 }
 
 .p-datatable .p-datatable-tbody > tr:hover {
-    /* Hover en Primary-50 para indicar selección */
-    background-color: rgba(239, 246, 255, 0.6) !important; 
+    background-color: rgba(239, 246, 255, 0.6) !important;
 }
 
 /* --- MODO OSCURO (Dark Mode) --- */
-/* En modo oscuro la tarjeta es dark:bg-primary-900/20 */
 .dark .p-datatable {
     background-color: transparent !important;
 }
@@ -72,35 +66,81 @@
 .dark .p-datatable .p-datatable-tbody > tr > td,
 .dark .p-datatable .p-paginator,
 .dark .p-paginator {
-    /* Transparente en celdas para no apilar */
-    background-color: transparent !important; 
-    border-color: rgba(255, 255, 255, 0.05) !important; /* Borde sutil blanco cristalino */
-    color: #e2e8f0 !important; /* Texto claro para mejor contraste */
+    background-color: transparent !important;
+    border-color: rgba(255, 255, 255, 0.05) !important;
+    color: #e2e8f0 !important;
 }
 
 .dark .p-datatable .p-datatable-thead > tr > th {
-    /* Cabecera contextual al fondo oscuro de la tarjeta (azul marino/slate) */
-    background-color: rgba(30, 58, 138, 0.4) !important; 
+    background-color: rgba(30, 58, 138, 0.4) !important;
     color: #ffffff !important;
     font-weight: 600 !important;
 }
 
 .dark .p-datatable .p-datatable-tbody > tr {
-    /* Filas transparentes para mostrar el fondo de la tarjeta */
     background-color: transparent !important;
 }
 
 .dark .p-datatable .p-datatable-tbody > tr:hover {
-    /* Hover más integrado, como un highlight blanco sutil */
-    background-color: rgba(255, 255, 255, 0.08) !important; 
+    background-color: rgba(255, 255, 255, 0.08) !important;
 }
 
 .dark .p-datatable .p-datatable-tbody > tr:hover > td {
-    background-color: transparent !important; /* Para que td no sobreescriba el hover del tr */
+    background-color: transparent !important;
 }
 
 .dark .p-paginator {
-    /* Paginador integrado oscurecido */
     background-color: transparent !important;
 }
+
+/* ── Goal Badges ──────────────────────────────────────────────────────────── */
+.goal-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.65rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    background: #f1f5f9;
+    color: #475569;
+}
+.goal-badge--lose_weight   { background: #fef3c7; color: #92400e; }
+.goal-badge--gain_muscle   { background: #dbeafe; color: #1e40af; }
+.goal-badge--maintain      { background: #d1fae5; color: #065f46; }
+.goal-badge--improve_cardio { background: #ede9fe; color: #5b21b6; }
+.goal-badge--flexibility    { background: #fce7f3; color: #9d174d; }
+
+/* ── Status Badges ────────────────────────────────────────────────────────── */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.65rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+.status-badge--active   { background: #d1fae5; color: #065f46; }
+.status-badge--inactive { background: #fee2e2; color: #991b1b; }
+.status-badge--pending  { background: #fef3c7; color: #92400e; }
+
+/* ── Action Buttons ───────────────────────────────────────────────────────── */
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.15s ease;
+    background: transparent;
+}
+.action-btn--view  { color: #3b82f6; }
+.action-btn--view:hover  { background: #dbeafe; color: #1d4ed8; }
+.action-btn--delete { color: #ef4444; }
+.action-btn--delete:hover { background: #fee2e2; color: #991b1b; }
 

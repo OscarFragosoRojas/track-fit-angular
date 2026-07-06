@@ -7,6 +7,30 @@
     [createLabel]="'Nuevo paciente'" (onCreate)="navigateToNew()" class="col-span-12 block w-full mb-4">
 </app-header>
 
+<!-- Custom cell templates (se asignan a columns en ngAfterViewInit) -->
+<ng-template #goalTpl let-row>
+    <span class="goal-badge goal-badge--{{ row.physicalStats?.goal }}">
+        {{ goalLabel(row) }}
+    </span>
+</ng-template>
+
+<ng-template #statusTpl let-row>
+    <span class="status-badge status-badge--{{ row.status }}">
+        {{ statusLabel(row) }}
+    </span>
+</ng-template>
+
+<ng-template #actionsTpl let-row>
+    <div class="flex items-center gap-2 justify-start">
+        <button class="action-btn action-btn--view" (click)="navigateToDetail(row.id)" title="Ver detalle">
+            <i class="pi pi-eye"></i>
+        </button>
+        <button class="action-btn action-btn--delete" (click)="confirmDelete(row)" title="Eliminar">
+            <i class="pi pi-trash"></i>
+        </button>
+    </div>
+</ng-template>
+
 <!-- Table -->
 <app-table [title]="'Directorio Activo'" [columns]="columns" [data]="filteredPatients()">
 </app-table>

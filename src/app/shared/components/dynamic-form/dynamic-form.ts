@@ -13,6 +13,7 @@ import { Button } from '../button/button';
   templateUrl: './dynamic-form.html',
 })
 export class DynamicForm {
+
   fields = input<DynamicField[]>([]);
   buttons = input<DynamicButton[]>([]);
   onSubmit = output<any>();

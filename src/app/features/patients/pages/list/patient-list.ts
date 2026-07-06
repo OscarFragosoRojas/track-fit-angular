@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed } from '@angular/core';
+import { Component, inject, signal, computed, AfterViewInit, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { TableModule } from 'primeng/table';
@@ -31,18 +31,25 @@ import { PATIENT_COLUMNS } from './columns';
     ToastModule,
     Header,
     TableComponent
-],
+  ],
   providers: [ConfirmationService, MessageService],
   templateUrl: './patient-list.html',
 })
-export class PatientList {
+export class PatientList implements AfterViewInit {
   private patientService = inject(PatientService);
   private router = inject(Router);
   private confirmSvc = inject(ConfirmationService);
   private messageSvc = inject(MessageService);
 
+  private cdr = inject(ChangeDetectorRef);
+
+  // ── Referencia a los ng-template del HTML ──────────────────────────────────
+  @ViewChild('goalTpl')    goalTpl!:    TemplateRef<any>;
+  @ViewChild('statusTpl')  statusTpl!:  TemplateRef<any>;
+  @ViewChild('actionsTpl') actionsTpl!: TemplateRef<any>;
+
   patients = this.patientService.patients;
-  columns = PATIENT_COLUMNS;
+  columns = [...PATIENT_COLUMNS];   // copia mutable para asignar templates
   searchQuery = signal('');
 
   filteredPatients = computed(() => {
@@ -54,10 +61,22 @@ export class PatientList {
     );
   });
 
-  // Expose helpers to template
-  goalLabel = (p: Patient) => GOAL_LABELS[p.physicalStats.goal];
+  // ── Una vez que la vista existe, enlazamos los TemplateRef a las columnas ───
+  ngAfterViewInit() {
+    const bind = (field: string, tpl: TemplateRef<any>) => {
+      const col = this.columns.find(c => c.field === field);
+      if (col) col.cellTemplate = tpl;
+    };
+    bind('goal',    this.goalTpl);
+    bind('status',  this.statusTpl);
+    bind('actions', this.actionsTpl);
+    this.cdr.detectChanges(); // evita ExpressionChangedAfterItHasBeenCheckedError
+  }
+
+  // ── Helpers expuestos al template ──────────────────────────────────────────
+  goalLabel    = (p: Patient) => GOAL_LABELS[p.physicalStats.goal];
   goalSeverity = (p: Patient) => GOAL_SEVERITY[p.physicalStats.goal];
-  statusLabel = (p: Patient) => STATUS_LABELS[p.status];
+  statusLabel  = (p: Patient) => STATUS_LABELS[p.status];
   statusSeverity = (p: Patient) => STATUS_SEVERITY[p.status];
 
   getAge(dob: string): number {
@@ -69,7 +88,7 @@ export class PatientList {
     return age;
   }
 
-  navigateToNew() { this.router.navigate(['/patients/new']); }
+  navigateToNew()            { this.router.navigate(['/patients/new']); }
   navigateToDetail(id: string) { this.router.navigate(['/patients', id]); }
 
   confirmDelete(patient: Patient) {
